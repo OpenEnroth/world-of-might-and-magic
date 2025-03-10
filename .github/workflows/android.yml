@@ -35,7 +35,7 @@ env:
   # This version is referenced in android/openenroth/build.gradle.
   # See https://developer.android.com/ndk/downloads for revision-to-version mapping.
   # When updating the version here you should also update it in the Dependencies repo!
-  NDK_REVISION: r26d
+  NDK_REVISION: r27c
 
 jobs:
   build_android:
@@ -77,16 +77,7 @@ jobs:
         env:
           # Secrets cannot be referenced in if: blocks, so we have to work it around.
           SECRETS_KEYSTORE: '${{secrets.KEYSTORE}}'
-
-      - name: Get NDK
-        id: get-ndk
-        uses: nttld/setup-ndk@v1.5.0
-        with:
-          ndk-version: '${{env.NDK_REVISION}}'
-          add-to-path: false
-          local-cache: true
-          link-to-sdk: true
-
+          
       - name: Install dependencies
         run: |
           sudo apt-get install -y yasm
